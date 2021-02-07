@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Company = require('../models/company')
+const Game = require('../models/game')
 
 // All Companies Route
 router.get('/', async (req, res) => {
@@ -33,13 +34,72 @@ router.post('/', async (req, res) => {
     })
     try {
         const newCompany = await company.save();
-        res.redirect('companies')
-        // res.redirect(`companies/${newCompany.id}`)
+        res.redirect(`companies/${newCompany.id}`)
     } catch {
         res.render('companies/new', {
             company: company,
             errorMessage: 'Error creating Company'
         })
+    }
+})
+
+router.get('/:id', async (req, res) => {
+    try {
+        const company = await Company.findById(req.params.id)
+        const games = await Game.find({ company: company.id }).limit(6).exec()
+        res.render('companies/show', {
+            company: company,
+            gamesByCompany: games
+        })
+    } catch {
+        res.redirect('/')
+    }
+})
+
+router.get('/:id', (req, res) => {
+    res.send('show companies ' + req.params.id)
+})
+
+router.get('/:id/edit', async (req, res) => {
+    try {
+        const company = await Company.findById(req.params.id)
+        res.render('companies/edit', { company: company })
+    } catch {
+        res.redirect("/companies")
+    }
+})
+
+router.put('/:id', async (req, res) => {
+    let company;
+    try {
+        company = await Company.findById(req.params.id)
+        company.name = req.body.name;
+        await company.save();
+        res.redirect(`/companies/${company.id}`)
+    } catch {
+        if (company == null) {
+            res.redirect('/')
+        } else {
+            res.render('companies/edit', {
+                company: company,
+                errorMessage: 'Error updating Company'
+            })
+        }
+    }
+})
+
+router.delete('/:id', async (req, res) => {
+    let company;
+    try {
+        company = await Company.findById(req.params.id)
+        await company.remove();
+        res.redirect(`/companies`)
+    } catch {
+        if (company == null) {
+            res.redirect('/')
+        } else {
+            res.redirect(`/companies/${company.id}`)
+        }
     }
 })
 

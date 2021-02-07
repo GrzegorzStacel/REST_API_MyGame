@@ -1,7 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const fs = require('fs');
-const path = require('path')
 const Game = require('../models/game')
 const Company = require('../models/company')
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']

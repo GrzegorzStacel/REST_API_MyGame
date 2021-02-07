@@ -7,4 +7,7 @@
 <br>
 <% companies.forEach(company => { %>
     <div><%= company.name %></div>
+    <a href="/companies/<%= company.id %>">View</a>
+    <a href="/companies/<%= company.id %>/edit">Edit</a>
+    <%- include('../partials/deleteForm', { url: `/companies/${company.id}` }) %> 
 <%  }) %>
