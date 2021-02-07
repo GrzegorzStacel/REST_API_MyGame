@@ -1,6 +1,8 @@
 <h2>Recently Added</h2>
 <div>
-<% games.forEach(game => { %>
-    <img src="<%= game.coverImagePath %> " alt="" height="150" width="100">
-<%  }) %>
+    <% games.forEach(game => { %>
+    <a href="/games/<%= game.id %>">
+        <img src="<%= game.coverImagePath %> " alt="" height="150" width="100">
+    </a>
+    <%  }) %>
 </div>

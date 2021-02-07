@@ -1,0 +1,10 @@
+<h2><%= game.title %></h2>
+<img src="<%= game.coverImagePath %>" width="100" height="150">
+<div>Compnay: <%= game.company.name %></div>
+<div>Publish Date: <%= game.publishDate.toDateString() %></div>
+<div>Scheduled Game Time: <%= game.playTime %> hours</div>
+<div>Description: <%= game.description %></div>
+
+<a href="/games/<%= game.id %>/edit">Edit</a>
+<%- include('../partials/deleteForm', { url: `/games/${game.id}` }) %> 
+<a href="/companies/<%= game.company.id %>">View Company</a>

@@ -17,6 +17,8 @@
 <br>
 <div>
     <% games.forEach(game => { %>
-    <img src="<%= game.coverImagePath %> " alt="" height="150" width="100">
+        <a href="/games/<%= game.id %>">
+            <img src="<%= game.coverImagePath %> " alt="" height="150" width="100">
+        </a>
     <%  }) %>
 </div>
