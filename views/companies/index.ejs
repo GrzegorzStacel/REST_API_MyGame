@@ -1,15 +1,22 @@
 <h2 class="page-header">Search Companies</h2>
 <form action="/companies" method="GET">
-    <label>Name</label>
-    <input type="text" name="name" value="<%= searchOptions.name %>">
-    <button type="submit">Search</button>
+    <div class="form-row">
+        <div class="form-item">
+            <label>Name</label>
+            <input type="text" name="name" value="<%= searchOptions.name %>">
+        </div>
+    </div>
+    <div class="form-row form-row-end">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+</form>
 </form>
 <br>
 <% companies.forEach(company => { %>
-    <div><%= company.name %></div>
-    <div class="btn-row">
-        <a class="btn btn-primary" href="/companies/<%= company.id %>">View</a>
-        <a class="btn btn-primary" href="/companies/<%= company.id %>/edit">Edit</a>
-        <%- include('../partials/deleteForm', { url: `/companies/${company.id}` }) %> 
-        <%  }) %>
-    </div>
+<div><%= company.name %></div>
+<div class="btn-row">
+    <a class="btn btn-primary" href="/companies/<%= company.id %>">View</a>
+    <a class="btn btn-primary" href="/companies/<%= company.id %>/edit">Edit</a>
+    <%- include('../partials/deleteForm', { url: `/companies/${company.id}` }) %>
+</div>
+<%  }) %>

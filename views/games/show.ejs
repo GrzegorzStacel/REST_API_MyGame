@@ -5,6 +5,6 @@
 <div>Scheduled Game Time: <%= game.playTime %> hours</div>
 <div>Description: <%= game.description %></div>
 
-<a href="/games/<%= game.id %>/edit">Edit</a>
+<a class="btn btn-primary" href="/games/<%= game.id %>/edit">Edit</a>
 <%- include('../partials/deleteForm', { url: `/games/${game.id}` }) %> 
-<a href="/companies/<%= game.company.id %>">View Company</a>
+<a  class="btn btn-primary" href="/companies/<%= game.company.id %>">View Company</a>
