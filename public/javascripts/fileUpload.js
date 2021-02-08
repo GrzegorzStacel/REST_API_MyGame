@@ -1,13 +1,28 @@
-FilePond.registerPlugin(
-    FilePondPluginImagePreview,
-    FilePondPluginImageResize,
-    FilePondPluginFileEncode,
-)
+const rootStyles = window.getComputedStyle(document.documentElement)
+const getPropertyValue = rootStyles.getPropertyValue('--game-cover-width-large');
 
-FilePond.setOptions({
-    stylePanelAspectRatio: 150 / 100,
-    imageResizeTargetWidth: 100,
-    imageResizeTargetHeight: 150
-})
+if (getPropertyValue != null && getPropertyValue != '') {
+    ready();
+} else {
+    document.getElementById('main-css').addEventListener('load', ready)
+}
 
-FilePond.parse(document.body);
+function ready() {
+    const coverWidth = parseFloat(getPropertyValue)
+    const coverAspectRatio = parseFloat(rootStyles.getPropertyValue('--game-cover-aspect-ratio'))
+    const coverHeight = coverWidth / coverAspectRatio
+
+    FilePond.registerPlugin(
+        FilePondPluginImagePreview,
+        FilePondPluginImageResize,
+        FilePondPluginFileEncode,
+    )
+    
+    FilePond.setOptions({
+        stylePanelAspectRatio: 1 / coverAspectRatio,
+        imageResizeTargetWidth: coverWidth,
+        imageResizeTargetHeight: coverHeight
+    })
+    
+    FilePond.parse(document.body);
+}

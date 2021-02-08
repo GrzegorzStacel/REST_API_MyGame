@@ -13,7 +13,7 @@ companySchema.pre('remove', function(next) {
         if (err) {
             next(err)
         } else if (games.length > 0) {
-            next(new Error('This game has game still'))
+            next(new Error('This company has game still')) ///TODO wyświetlić ten komunikat userowi
         } else {
             next();
         }

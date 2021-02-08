@@ -6,9 +6,5 @@
 
 <% if(gamesByCompany.length > 0) { %>
 <h2 class="page-header">Games By Company</h2>
-<% gamesByCompany.forEach(game => { %>
-<a href="/games/<%= game.id %>">
-    <img src="<%= game.coverImagePath %>" height="150" width="100">
-</a>
-<% }) %>
+<%- include('../partials/gameGrid', { games: gamesByCompany }) %> 
 <% } %>

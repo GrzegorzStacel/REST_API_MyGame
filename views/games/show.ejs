@@ -1,10 +1,22 @@
 <h2 class="page-header"><%= game.title %></h2>
-<img src="<%= game.coverImagePath %>" width="100" height="150">
-<div>Compnay: <%= game.company.name %></div>
-<div>Publish Date: <%= game.publishDate.toDateString() %></div>
-<div>Scheduled Game Time: <%= game.playTime %> hours</div>
-<div>Description: <%= game.description %></div>
-
-<a class="btn btn-primary" href="/games/<%= game.id %>/edit">Edit</a>
-<%- include('../partials/deleteForm', { url: `/games/${game.id}` }) %> 
-<a  class="btn btn-primary" href="/companies/<%= game.company.id %>">View Company</a>
+<div class="game-details">
+    <div>
+        <img class="game-cover" src="<%= game.coverImagePath %>">
+        <div class="game-details-btn-grid">
+            <a class="btn btn-primary" href="/games/<%= game.id %>/edit">Edit</a>
+            <%- include('../partials/deleteForm', { url: `/games/${game.id}` }) %> 
+            <a  class="btn btn-primary game-details-company-button" href="/companies/<%= game.company.id %>">View Company</a>
+        </div>
+    </div>
+    <div class="game-details-grid">
+        <div class="game-details-label">Company:</div>
+        <div><%= game.company.name %></div> 
+        <div class="game-details-label">Publis Date:</div>
+        <div><%= game.publishDate.toDateString() %></div>
+        <div class="game-details-label">Scheduled Game Time:</div>
+        <div><%= game.playTime %> hours</div>
+        <div class="game-details-label">Description:</div>
+        <div><%= game.description %></div>
+    </div>
+    
+</div>
